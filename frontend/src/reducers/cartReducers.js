@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
@@ -15,7 +15,19 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       } else {
         return { ...state, cartItems: [...state.cartItems, item] };
       }
+    case CART_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+      };
     default:
       return state;
   }
 };
+
+//(x) => x.product !== action.payload) will return true which means item should be added to cart
+//The meaning of this line of code:
+//We are filtering out the product where its id is equal to action.payload
+//From cartAction, we set payload to productId --> product we will delete.
+//cartReducer will update the store and remove the product from cartItems.
+//cartItems: state.cartItems.filter((x) => x.product !== action.payload),
