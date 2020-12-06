@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
+import CartScreen from "./screens/CartScreen";
+
 function App() {
   return (
     <Router>
@@ -22,6 +24,7 @@ function App() {
         </header>
         <main>
           <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/cart/:id?" component={CartScreen} />
           <Route path="/product/:id" component={ProductScreen} />
         </main>
         <footer className="row center">All rights reserved</footer>
